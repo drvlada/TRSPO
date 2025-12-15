@@ -1,0 +1,18 @@
+services:
+  server:
+    build: ./server
+    container_name: collatz_server
+    environment:
+      - SERVER_PORT=9000
+    ports:
+      - "9000:9000"
+
+  client:
+    build: ./client
+    container_name: collatz_client
+    environment:
+      - COLLATZ_COUNT=20000
+      - SERVER_HOST=server
+      - SERVER_PORT=9000
+    depends_on:
+      - server
